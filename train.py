@@ -1,7 +1,6 @@
 import os
 from operator import itemgetter    
 import numpy as np
-import pandas as pd
 #import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
@@ -17,13 +16,6 @@ from keras.utils import np_utils, to_categorical
  
 from keras.datasets import imdb
 
-print(os.getcwd())
-print("Modules imported \n")
-print("Files in current directory:")
-#from subprocess import check_output
-#print(check_output(["ls", "../input"]).decode("utf8")) #check the files available in the directory
-# LOAD IMDB DATA
-
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
 path="imdb.npz",
 num_words=10000)
@@ -34,10 +26,6 @@ print("_"*100)
 print("test_data ", test_data.shape)
 print("test_labels ", test_labels.shape)
 print("_"*100)
-print("Maximum value of a word index ")
-print(max([max(sequence) for sequence in train_data]))
-print("Maximum length num words of review in train ")
-print(max([len(sequence) for sequence in train_data]))
 
 # See an actual review in words
 # Reverse from integers to words using the DICTIONARY (given by keras...need to do nothing to create it)
@@ -46,13 +34,6 @@ word_index = imdb.get_word_index()
 
 reverse_word_index = dict(
 [(value, key) for (key, value) in word_index.items()])
-
-print("train 123 is")
-print(train_data[123])
-decoded_review = ' '.join(
-[reverse_word_index.get(i - 3, '?') for i in train_data[123]])
-
-print(decoded_review)
 
 # VECTORIZE as one cannot feed integers into a NN
 # Encoding the integer sequences into a binary matrix - one hot encoder basically
@@ -128,7 +109,5 @@ results = model.evaluate(x_test, y_test)
 print("_"*100)
 print("Test Loss and Accuracy")
 print("results ", results)
-history_dict = history.history
-history_dict.keys()
 
 model.save('./sentiment2.model.h5')

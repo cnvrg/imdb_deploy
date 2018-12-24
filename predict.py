@@ -25,7 +25,9 @@ def decode_back_sentence(decoded):
     return decoded_review
 
 def predict(sentence):
+
     encoded = encode_sentence(sentence)
+
     pred = np.array([encoded])
     pred = vectorize_sequences(pred)
     a = model.predict(pred)
@@ -40,9 +42,8 @@ def vectorize_sequences(sequences, dimension=10000):
 def encode_sentence(sentence):
     test=[1]
     for word in word_tokenize(sentence):
-        test.append(word_to_id.get(word, word_to_id["<UNK>"]))
+        word_id = word_to_id.get(word, word_to_id["<UNK>"])
+        if word_id > 9999:
+            word_id = word_to_id["<UNK>"]
+        test.append(word_id)
     return test
-
-#predict("beautiful and touching movie rich colors great settings good acting and one of the most charming movies i have seen in a while i never saw such an interesting setting when i was in china my wife liked it so much she asked me to bfdsldsf on and rate it so other would enjoy too")
-#predict("I hate this movie it's gross bad bad dont watch why ever did that")
-
