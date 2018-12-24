@@ -4,6 +4,9 @@ from nltk import word_tokenize
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
 from keras.preprocessing import sequence
+import nltk
+nltk.download('punkt')
+
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
