@@ -1,0 +1,32 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: predict-imdb 
+  namespace: default
+  labels:
+    app: imdb-server
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: imdb-server
+  template:
+    metadata:
+      labels:
+        app: imdb-server
+    spec:
+      containers:
+      - name: app
+        image: tensorflow/tensorflow:latest-devel-py3
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args:
+         - echo "start";
+           git clone https://github.com/itayariel/imdb_keras;
+           cd imdb_keras;
+           pip install -r requirements.txt;
+           python server.py;
+        ports:
+        - containerPort: 8080
+          protocol: TCP
