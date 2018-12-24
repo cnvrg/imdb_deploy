@@ -1,5 +1,6 @@
 from keras.datasets import imdb
 import numpy as np
+import keras
 from nltk import word_tokenize
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
@@ -19,7 +20,7 @@ word_to_id["<PAD>"] = 0
 word_to_id["<START>"] = 1
 word_to_id["<UNK>"] = 2
 
-model = tf.keras.models.load_model("./sentiment2.model.h5")
+model = keras.models.load_model("./sentiment2.model.h5")
 
 reverse_word_index = dict([(value, key) for (key, value) in word_to_id.items()])
 
