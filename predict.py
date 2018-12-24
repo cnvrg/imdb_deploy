@@ -21,6 +21,7 @@ word_to_id["<START>"] = 1
 word_to_id["<UNK>"] = 2
 
 model = keras.models.load_model("./sentiment2.model.h5")
+model._make_predict_function()
 
 reverse_word_index = dict([(value, key) for (key, value) in word_to_id.items()])
 
