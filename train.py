@@ -110,4 +110,4 @@ print("_"*100)
 print("Test Loss and Accuracy")
 print("results ", results)
 
-model.save('output/sentiment2.model.h5')
+model.save('./sentiment2.model.h5')
