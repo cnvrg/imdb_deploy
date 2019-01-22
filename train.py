@@ -110,4 +110,6 @@ print("_"*100)
 print("Test Loss and Accuracy")
 print("results ", results)
 
+if not os.path.exists('output'):
+    os.mkdir('output')
 model.save('output/sentiment2.model.h5')
