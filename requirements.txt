@@ -3,3 +3,4 @@ flask
 numpy==1.16.1
 tensorflow
 nltk
+awscli
