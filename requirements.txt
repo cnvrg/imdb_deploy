@@ -1,5 +1,5 @@
 keras
 flask
-numpy
+numpy==1.16.1
 tensorflow
 nltk
