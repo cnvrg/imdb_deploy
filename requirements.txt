@@ -1,6 +1,6 @@
 keras
 flask
 numpy==1.16.1
-tensorflow-gpu
+tensorflow-gpu==1.8.0
 nltk
 awscli
