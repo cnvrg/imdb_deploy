@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: predict-imdb
+  namespace: default
+spec:
+  containers:
+  - name: train
+    image: tensorflow/tensorflow:latest-devel-gpu-py3
+    imagePullPolicy: IfNotPresent
+    command: ["/bin/sh", "-c"]
+    args:
+     - git clone https://github.com/cnvrg/imdb_deploy;
+       cd imdb_deploy;
+       pip install -r requirements.txt;
+       python train.py;
+       aws s3 cp output/sentiment2.model.h5 s3://imdb-artifacts/sentiment2.model.h5;
+       tail -f /dev/null;
