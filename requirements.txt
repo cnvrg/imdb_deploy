@@ -1,5 +1,2 @@
-keras
-flask
 numpy==1.16.1
 nltk
-awscli
