@@ -1,0 +1,31 @@
+name: Check Licenses
+
+on:
+  push:
+    branches:
+      - main
+      - add-license
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.16
+      - name: Install addlicense
+        run: go install github.com/google/addlicense@latest
+      - name: Check python code licenses
+        run: addlicense --check -c 'Intel Corporation' -l MIT -s ./*.py ./**/*.py
+      - name: Check shell code licenses
+        run: addlicense --check -c 'Intel Corporation' -l MIT -s ./*.sh ./**/*.sh ./*.func ./**/*.func
+      - name: Check yaml licenses
+        run: addlicense --check -c 'Intel Corporation' -l MIT -s ./*.yaml ./**/*.yaml
+      - name: Check Dockerfile licenses
+        run: addlicense --check -c 'Intel Corporation' -l MIT -s ./Dockerfile ./**/Dockerfile
